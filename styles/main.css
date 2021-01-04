@@ -14,14 +14,17 @@ body {
   header {
     grid-area: header;
     border: 2px solid red;
+    background: red;
+    color: white;
+    font-size: 30px;
   }
   
   main {
     grid-area: main;
-    border: 2px solid blue;
+    border: 2px solid red;
   }
   
   nav {
     grid-area: nav;
-    border: 2px solid green;
+    border: 2px solid red;
   }
