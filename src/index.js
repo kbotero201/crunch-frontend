@@ -1,4 +1,5 @@
 
+// FETCH
 
 function getCereals(){
     return fetch('http://127.0.0.1:3000/api/v1/cereals/')
@@ -25,12 +26,15 @@ function updateLikes(){
 
 }
 
-// functions 
+// CONST ELEMENTS
 
 let main = document.querySelector("main")
 
 
 function displayCereals(cereal){
+
+    //CREATE ELEMENTS
+
     let pLikes = document.createElement("p")
     let card = document.createElement("div")
     let img = document.createElement("img")
@@ -39,11 +43,10 @@ function displayCereals(cereal){
     let pTopping = document.createElement("p")
     let pDescription = document.createElement("p")
     let button = document.createElement("button")
-    let commentButton = document.createElement("button")
-    let input = document.createElement("input")
     let ul = document.createElement("ul")
-    
 
+    //EDIT ELEMENTS
+    
     card.classList.add("card")
     h2.textContent = cereal.name 
     img.src = cereal.image
@@ -52,19 +55,43 @@ function displayCereals(cereal){
     pTopping.textContent = cereal.topping
     button.textContent= "Like"
     button.classList.add("like-btn")
-    commentButton.textContent = "Comment"
     pLikes.textContent = `${cereal.likes} Likes`
     pLikes.classList.add("like")
     card.dataset.id = cereal.id
-   
 
-    card.append(img, h2, pLikes, button, pDescription, pMilk, pTopping, input, commentButton)
+
+    //DISPLAY COMMENTS 
+
+    cereal.comments.forEach(comment =>{
+        let li = document.createElement("li")
+        li.textContent = comment.text
+        ul.append(li)
+    } )
+
+    //COMMENT FORM 
+    let submit = document.createElement("input")
+    let input = document.createElement("input")
+    let form = document.createElement("form")
+    let br = document.createElement("br")
+    input.type = "text"
+    input.placeholder = "Type Comment here.."
+    input.name = "text"
+    submit.type = "submit"
+    form.append(input,br, submit)
+     
+
+    //APPEND ELEMENTS
+
+    card.append(img, h2, pLikes, button, pDescription, pMilk, pTopping, ul, form)
     main.append(card)
+
+
+
 
 }
 
 
-
+// LIKE FEATURE 
 
 main.addEventListener("click", function(evt){
     if(evt.target.matches(".like-btn")){
@@ -92,6 +119,11 @@ main.addEventListener("click", function(evt){
 
     }
 })
+
+form = document.querySelector("form")
+
+
+
 
 
 
