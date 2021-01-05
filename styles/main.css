@@ -28,3 +28,23 @@ body {
     grid-area: nav;
     border: 2px solid red;
   }
+
+  .card {
+    text-align: left;
+    border: grey solid 1px;
+    padding: 1rem;
+    width: stretch;
+    height: auto;
+    display: inline-grid;
+    margin: 1rem 2rem;
+    box-shadow: 3px 4px #424242
+  }
+
+  .container {
+    padding: 1rem;
+    width: stretch;
+    height: auto;
+    display: none;
+    background: #515DA2;
+    opacity: .8;
+  }
