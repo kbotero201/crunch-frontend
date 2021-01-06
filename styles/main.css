@@ -18,6 +18,24 @@ body {
     color: white;
     font-size: 30px;
   }
+
+  #slider-menu {
+    display: flex;
+    overflow-x: auto;
+    margin: 1rem 0;
+    max-width: calc(100vw - 2rem);
+  }
+  
+  #slider-menu img {
+    flex: 0 1 auto;
+    height: 150px;
+    margin-right: 0.5rem;
+    cursor: pointer;
+  }
+  
+  #slider-menu img:last-child {
+    margin-right: 0;
+  }
   
   main {
     grid-area: main;
@@ -30,6 +48,7 @@ body {
   }
 
   .card {
+    cursor: pointer;
     text-align: left;
     border: grey solid 1px;
     padding: 1rem;
@@ -47,4 +66,55 @@ body {
     display: none;
     background: #515DA2;
     opacity: .8;
+  }
+
+  .popUp{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    border-radius: 20px;
+    z-index: 20;
+    background-color: white;
+    width: 500px;
+    max-width: 75%;
+  }
+
+
+  .popUpHeader{
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+  }
+
+  .title{
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .closeBtn{
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  .popUpBody{
+    padding: 10px 15px
+  }
+
+  #overlay{
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    pointer-events: none;
   }
