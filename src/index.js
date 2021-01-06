@@ -81,6 +81,7 @@ function displayCereals(cereal){
         //Body
         let popUpBody = document.createElement("div");
         popUpBody.classList.add("popUpBody");
+        popUpBody.dataset.id = cereal.id
 
         //DISPLAY COMMENTS 
         cereal.comments.forEach(comment =>{
@@ -114,39 +115,46 @@ function displayCereals(cereal){
 
         button.addEventListener("click", function(evt){
         })
+
+        // LIKE FEATURE 
+
+        popUpBody.addEventListener("click", function(evt){
+            if(evt.target.matches(".like-btn")){
+                console.log("clcked!")
+                let card = evt.target.closest(".popUpBody")
+                let id = popUpBody.dataset.id
+                let p = card.querySelector(".like")
+                let newLikes = parseInt(p.textContent) + 1
+
+                console.log("clicked")
+        
+            return fetch(`http://127.0.0.1:3000/api/v1/cereals/${id}`, {
+            method: 'PATCH', 
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: "application/json"
+            },
+                body: JSON.stringify({
+                    likes: newLikes
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                p.textContent = `${data.likes} Likes`
+                console.log(data)
+            })
+        
+            }
+        })
+    
     })
 
+    
 }
 
 
-// LIKE FEATURE 
 
-main.addEventListener("click", function(evt){
-    if(evt.target.matches(".like-btn")){
-        console.log("clcked!")
-        let card = evt.target.closest(".card")
-        let id = card.dataset.id
-        let p = card.querySelector(".like")
-        let newLikes = parseInt(p.textContent) + 1
 
-    return fetch(`http://127.0.0.1:3000/api/v1/cereals/${id}`, {
-    method: 'PATCH', 
-    headers: {
-        'Content-Type': 'application/json',
-        Accept: "application/json"
-    },
-        body: JSON.stringify({
-            likes: newLikes
-        }),
-    })
-    .then(response => response.json())
-    .then(data => {
-        p.textContent = `${data.likes} Likes`
-        console.log(data)
-    })
-
-    }
-})
 
 
 function sliderMenu(cereal){
