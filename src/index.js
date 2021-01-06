@@ -61,7 +61,7 @@ function displayCereals(cereal){
     main.append(card)
 
     card.addEventListener("click", function(evt){
-// POP UP
+        // POP UP
 
         overlay.style.opacity = "1";
         overlay.style.pointerEvents = "all";

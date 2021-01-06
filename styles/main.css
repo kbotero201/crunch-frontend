@@ -4,6 +4,7 @@ body {
     display: grid;
     grid-template-areas: 
       "header header"
+      "nav slider"
       "nav main";
     grid-template-columns: 300px 1fr;
     grid-template-rows: 80px 1fr;
@@ -19,16 +20,19 @@ body {
     font-size: 30px;
   }
 
+
   #slider-menu {
     display: flex;
+    border: 2px solid red;
     overflow-x: auto;
     margin: 1rem 0;
     max-width: calc(100vw - 2rem);
   }
   
   #slider-menu img {
+    border: 2px solid red;
     flex: 0 1 auto;
-    height: 150px;
+    height: 120px;
     margin-right: 0.5rem;
     cursor: pointer;
   }
