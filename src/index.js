@@ -93,28 +93,14 @@ function displayCereals(cereal){
         let ul = document.createElement("ul")
 
         //DISPLAY COMMENTS 
-        cereal.comments.forEach(comment =>{
-            let li = document.createElement("li")
-            li.textContent = comment.text
-            let deleteBtn = document.createElement("button")
-            deleteBtn.classList.add("deleteBtn")
-            deleteBtn.textContent = "X"
-            deleteBtn.dataset.id = comment.id
-            // Comment Delete
-            deleteBtn.addEventListener("click", function(evt){
-              id = deleteBtn.dataset.id
-              fetch(`http://localhost:3000/api/v1/comments/${id}`, {
-                method: 'DELETE',
-              })
-               .then(r => r.json())
-               .then(() => {
-                 li.remove()
-                 deleteBtn.remove()
-               })
-          })
-
-            ul.append(li, deleteBtn)
-        } )
+        fetch(`http://127.0.0.1:3000/api/v1/cereals/${cereal.id}`)
+          .then(resp => resp.json()
+          .then(data => {
+              data.comments.forEach(comment =>{
+                let li = createComment(comment.id, comment.text, comment.name)
+                ul.append(li)
+            })
+          }))
         //COMMENT FORM 
         let submit = document.createElement("input")
         let inputName = document.createElement("input")
@@ -129,6 +115,7 @@ function displayCereals(cereal){
         inputName.name = "nameText"
         submit.type = "submit"
         form.dataset.id = cereal.id
+        form.classList.add("commentForm")
         form.append(inputName, input, br, submit)
 
           form.addEventListener("submit", (event) => {
@@ -152,11 +139,11 @@ function displayCereals(cereal){
             fetch('http://127.0.0.1:3000/api/v1/comments', config)
                 .then(response => response.json())
                 .then(comment => {
-                  let li = document.createElement("li")
-                  li.textContent = comment.text
+                  let li = createComment(comment.id, comment.text, comment.name)
                   ul.append(li)
-                  getCereals()
                 })
+
+            event.target.reset()
 
           })
 
@@ -209,6 +196,31 @@ function displayCereals(cereal){
     
 }
 
+
+// COMMENT FUNCTION
+
+function createComment(id,text,name){
+  let comment = document.createElement("li")
+  comment.classList.add("comment")
+  let li = document.createElement("li")
+  li.textContent = name + " : " + text
+  let deleteBtn = document.createElement("button")
+  deleteBtn.classList.add("deleteBtn")
+  deleteBtn.textContent = "X"
+  // Comment Delete
+  deleteBtn.addEventListener("click", function(evt){
+    fetch(`http://localhost:3000/api/v1/comments/${id}`, {
+      method: 'DELETE',
+    })
+      .then(r => r.json())
+      .then(() => {
+        console.log(deleteBtn.parentNode)
+        deleteBtn.parentNode.remove()
+      })
+  })
+  comment.append(li, deleteBtn)
+  return comment
+}
 
 // SLIDER MENU
 
