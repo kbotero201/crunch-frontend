@@ -264,18 +264,26 @@ function sliderMenu(cereal){
     
 }
 
+// CLEAR CARDS FROM MAIN
+
+function clearMain(){
+  while(main.childElementCount > 0){
+    main.firstChild.remove()
+  }
+}
+
 
 // FILTER 1
-
 filter1Btn.addEventListener("click", function(event){
+  clearMain()
   return fetch('http://127.0.0.1:3000/api/v1/cereals/')
     .then(resp => resp.json()
     .then(data => {
-        data.forEach(cereal => {
-          if(cereal.likes == 0){
-            displayCereals(cereal)
-          }
-        })
+      data.forEach(cereal => {
+        if(cereal.likes == 0){
+          displayCereals(cereal)
+        }
+      })
       }))
 })
 
