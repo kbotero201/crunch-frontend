@@ -5,7 +5,6 @@ const body = document.querySelector("body");
 const overlay = document.querySelector("#overlay");
 const main = document.querySelector("main")
 const filter1Btn = document.querySelector(".filter1Btn")
-let cereals = []
 
 // SPLASH SCREEN
 
@@ -22,10 +21,7 @@ function getCereals(){
     return fetch('http://127.0.0.1:3000/api/v1/cereals/')
     .then(resp => resp.json()
     .then(data => {
-        data.forEach(cereal => {
-          cereals.push(cereal)
-          displayCereals(cereal)
-        })
+        data.forEach(cereal => displayCereals(cereal))
         data.forEach(data => sliderMenu(data))
         console.log(data)
     }))
@@ -279,12 +275,12 @@ filter1Btn.addEventListener("click", function(event){
   return fetch('http://127.0.0.1:3000/api/v1/cereals/')
     .then(resp => resp.json()
     .then(data => {
+      cereals = []
       data.forEach(cereal => {
-        if(cereal.likes == 0){
-          displayCereals(cereal)
-        }
+          cereals.push(cereal)
       })
-      }))
+      cereals.sort.forEach(cereal=> displayCereals(cereal))
+    }))
 })
 
 
