@@ -1,23 +1,77 @@
+@import url(https://fonts.googleapis.com/css?family=Luckiest+Guy);
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+
+
 body {
     margin: 0;
     padding: 0;
     display: grid;
+    background-color: #BFEFFF;
+    color: #5c00ee;
     grid-template-areas: 
       "header header"
       "nav slider"
       "nav main";
     grid-template-columns: 300px 1fr;
     grid-template-rows: 80px 1fr;
-    row-gap: 10px;
+    row-gap: 15px;
     column-gap: 15px;
   }
   
   header {
     grid-area: header;
     border: 2px solid red;
-    background: red;
+    background: #5c00ee;
+    font-family: 'Hanalei Fill', cursive;
     color: white;
-    font-size: 30px;
+    font-size: 28px;
+  }
+
+
+  .splash{
+    position: fixed;
+    top: 0;
+    left: 0; 
+    width: 100%;
+    height: 100vh;
+    background: #5c00ee; 
+    z-index: 200;
+    color: white;
+    text-align: center;
+    line-height: 90vh;
+
+  }
+
+  @keyframes fadeIn{
+    to{
+      opacity: 1;
+    }
+  }
+
+  .fade-in{
+    opacity: 0;
+    animation: fadeIn 1s ease-in forwards;
+  }
+
+  .splash.display-none{
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    left: 0; 
+    width: 100%;
+    height: 100vh;
+    background: #5c00ee; 
+    z-index: -10;
+    color: white;
+    text-align: center;
+    line-height: 90vh;
+    transition: all 0.5s;
+
   }
 
 
@@ -43,7 +97,9 @@ body {
   
   main {
     grid-area: main;
-    border: 2px solid red;
+    border: 1px solid red;
+    background-color: #BFEFFF
+    
   }
   
   nav {
@@ -54,13 +110,15 @@ body {
   .card {
     cursor: pointer;
     text-align: left;
-    border: grey solid 1px;
+    border: #ffffff 1px;
+    border-radius: 25px;
     padding: 1rem;
     width: stretch;
     height: auto;
     display: inline-grid;
-    margin: 1rem 2rem;
-    box-shadow: 3px 4px #424242
+    margin: 1rem 0.5rem;
+    background-color: #ffffff;
+    font-family: 'Oswald', sans-serif;
   }
 
   .container {
