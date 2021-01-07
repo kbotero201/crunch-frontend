@@ -85,7 +85,7 @@ function displayCereals(cereal){
         title.textContent = h2.textContent;
         let closeBtn = document.createElement("button");
         closeBtn.classList.add("closeBtn");
-        closeBtn.textContent = "X" // &times; <- make it into a symbol
+        closeBtn.textContent = "X" 
 
         //Body
         let popUpBody = document.createElement("div");
@@ -108,7 +108,38 @@ function displayCereals(cereal){
         input.placeholder = "Type Comment here.."
         input.name = "text"
         submit.type = "submit"
+        form.dataset.id = cereal.id
         form.append(input,br, submit)
+
+          form.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+
+            // TODO Add the "name" 
+            const newComment = {
+              name: "TestName",
+              text: event.target.text.value,
+              cereal_id: parseInt(event.target.dataset.id)
+            }
+
+            const config = {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+              },
+              body: JSON.stringify(newComment)
+            }
+
+            fetch('http://127.0.0.1:3000/api/v1/comments', config)
+                .then(response => response.json())
+                .then(comment => {
+                  let li = document.createElement("li")
+                  li.textContent = comment.text
+                  ul.append(li)
+                })
+
+          })
 
         //Append
         popUpHeader.append(title, closeBtn);
@@ -120,9 +151,6 @@ function displayCereals(cereal){
             overlay.style.opacity = "0";
             overlay.style.pointerEvents = "none";
             popUp.remove();
-        })
-
-        button.addEventListener("click", function(evt){
         })
 
         // LIKE FEATURE 
@@ -280,4 +308,3 @@ function burst() {
 
 
 getCereals()
-
