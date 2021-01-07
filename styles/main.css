@@ -112,7 +112,6 @@ body {
   }
 
   .card {
-    cursor: pointer;
     text-align: left;
     border: #ffffff 1px;
     border-radius: 25px;
@@ -138,6 +137,7 @@ body {
 
   .card img {
     /* border: 2px solid red; */
+    cursor: pointer;
     flex: 0 1 auto;
     height: 250px;
     margin-right: 0.5rem;
