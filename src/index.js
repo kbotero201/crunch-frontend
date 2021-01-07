@@ -48,9 +48,16 @@ function displayCereals(cereal){
     let upvoteDivVotes = document.createElement("div")
     let upvoteDivButton = document.createElement("div")
 
+    let iconMilk  = document.createElement("img")
+    let iconTopping  = document.createElement("img")
+  
+
 
 
     //EDIT ELEMENTS
+
+    pMilk.append(iconMilk)
+    pTopping.append(iconTopping)
     
     card.classList.add("card")
     h2.textContent = cereal.name 
@@ -71,12 +78,19 @@ function displayCereals(cereal){
     upvoteDivButton.classList.add("button")
     upvoteDivButton.textContent = "Vote this up now"
 
-  
+    iconMilk.classList.add("icon")
+    iconMilk.src = './assets/images/milk.png'
+    iconTopping.classList.add("icon")
+    iconTopping.src = './assets/images/cereals.png'
 
+    pMilk.append(iconMilk)
+    pTopping.append(iconTopping)
+    
 
     //APPEND ELEMENTS
 
     upvoteDiv.append(upvoteDivVotes, upvoteDivButton)
+
 
     div1.append(img)
     div2.append(h2, pSmallDescription, upvoteDiv )
@@ -109,6 +123,8 @@ function displayCereals(cereal){
         popUpBody.classList.add("popUpBody");
         popUpBody.dataset.id = cereal.id
         let ul = document.createElement("ul")
+
+
 
         //DISPLAY COMMENTS 
         fetch(`http://127.0.0.1:3000/api/v1/cereals/${cereal.id}`)
@@ -166,10 +182,14 @@ function displayCereals(cereal){
           })
 
         //Append
+
+
         popUpHeader.append(title, closeBtn);
-        popUpBody.append(popUpImg, pDescription, pMilk, pTopping, ul,form);
+        popUpBody.append(popUpImg, pDescription, pMilk, pTopping, ul, form);
         popUp.append(popUpHeader, popUpBody);
         body.append(popUp);
+
+  
 
         // Close PopUP
         closeBtn.addEventListener("click", function(evt){
