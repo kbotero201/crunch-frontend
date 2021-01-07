@@ -250,10 +250,21 @@ function sliderMenu(cereal){
     let img = document.createElement("img")
     let id = cereal.id
     img.src = cereal.image
+    img.dataset.id = id 
     menu.append(img)
+
+
+
+      //window.open('https://attacomsian.com', '_blank');
 
     img.addEventListener("click", function(evt){
       console.log("clicked!")
+
+      return fetch(`http://127.0.0.1:3000/api/v1/cereals/${id}`)
+      .then(resp => resp.json())
+      .then(data => {
+       window.open(data.ad_url, '_blank')
+      })
 
     })
 
