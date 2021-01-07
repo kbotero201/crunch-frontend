@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', (evt) =>{
     burst()
     setTimeout(()=>{
         splash.classList.add("display-none")
-    }, 4000)
+    }, 1000)
 })
 
 // FETCH FUNCTIONS
@@ -31,7 +31,6 @@ function displayCereals(cereal){
 
     //CREATE ELEMENTS
 
-    let pLikes = document.createElement("p")
     let card = document.createElement("div")
     let img = document.createElement("img")
     let popUpImg = document.createElement("img")
@@ -40,10 +39,13 @@ function displayCereals(cereal){
     let pTopping = document.createElement("p")
     let pDescription = document.createElement("p")
     let pSmallDescription = document.createElement("p")
-    let button = document.createElement("button")
 
     let div1 = document.createElement("div")
     let div2 = document.createElement("div")
+
+    let upvoteDiv= document.createElement("div")
+    let upvoteDivVotes = document.createElement("div")
+    let upvoteDivButton = document.createElement("div")
 
 
 
@@ -57,24 +59,31 @@ function displayCereals(cereal){
     pDescription.textContent = cereal.description
     pSmallDescription.textContent = cereal.description // <- cut the string turn it into small description
     pTopping.textContent = cereal.topping
-    button.textContent= "Like"
-    button.classList.add("like-btn")
-    pLikes.textContent = `${cereal.likes} Likes`
-    pLikes.classList.add("like")
     card.dataset.id = cereal.id
 
+    div1.classList.add("div1")
+    div2.classList.add("div2")
 
-     
+    upvoteDiv.classList.add("wrap")
+    upvoteDivVotes.classList.add("votes")
+    upvoteDivVotes.textContent = cereal.likes
+    upvoteDivButton.classList.add("button")
+    upvoteDivButton.textContent = "Vote this up now"
+
+  
+
 
     //APPEND ELEMENTS
 
+    upvoteDiv.append(upvoteDivVotes, upvoteDivButton)
+
     div1.append(img)
-    div2.append(h2, pSmallDescription )
+    div2.append(h2, pSmallDescription, upvoteDiv )
 
     card.append(div1, div2)
     main.append(card)
 
-    card.addEventListener("click", function(evt){
+    img.addEventListener("click", function(evt){
         // POP UP
 
         overlay.style.opacity = "1";
@@ -157,7 +166,7 @@ function displayCereals(cereal){
 
         //Append
         popUpHeader.append(title, closeBtn);
-        popUpBody.append(popUpImg, pDescription, pMilk, pTopping, pLikes, button, ul,form);
+        popUpBody.append(popUpImg, pDescription, pMilk, pTopping, ul,form);
         popUp.append(popUpHeader, popUpBody);
         body.append(popUp);
 
@@ -168,38 +177,40 @@ function displayCereals(cereal){
             popUp.remove();
         })
 
-        // LIKE FEATURE 
+      
 
-        popUpBody.addEventListener("click", function(evt){
-            if(evt.target.matches(".like-btn")){
-                console.log("clcked!")
-                let card = evt.target.closest(".popUpBody")
-                let id = popUpBody.dataset.id
-                let p = card.querySelector(".like")
-                let newLikes = parseInt(p.textContent) + 1
-
-                console.log("clicked")
-        
-            return fetch(`http://127.0.0.1:3000/api/v1/cereals/${id}`, {
-            method: 'PATCH', 
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: "application/json"
-            },
-                body: JSON.stringify({
-                    likes: newLikes
-                }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                p.textContent = `${data.likes} Likes`
-                console.log(data)
-            })
-        
-            }
-        })
     
     })
+
+
+  card.addEventListener("click", function(evt){
+    if(evt.target.matches(".button")){
+      console.log("clcked!")
+      let card = evt.target.closest(".card")
+      let id = card.dataset.id
+      let p = card.querySelector(".votes")
+      let newLikes = parseInt(p.textContent) + 1
+
+      console.log("clicked")
+
+      return fetch(`http://127.0.0.1:3000/api/v1/cereals/${id}`, {
+      method: 'PATCH', 
+      headers: {
+      'Content-Type': 'application/json',
+      Accept: "application/json"
+      },
+      body: JSON.stringify({
+          likes: newLikes
+      }),
+      })
+      .then(response => response.json())
+      .then(data => {
+      p.textContent = `${data.likes}`
+      console.log(data)
+      })
+
+    }
+  })
 
     
 }
