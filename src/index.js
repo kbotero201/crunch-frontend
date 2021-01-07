@@ -42,6 +42,9 @@ function displayCereals(cereal){
     let pSmallDescription = document.createElement("p")
     let button = document.createElement("button")
 
+    let div1 = document.createElement("div")
+    let div2 = document.createElement("div")
+
 
 
     //EDIT ELEMENTS
@@ -59,11 +62,16 @@ function displayCereals(cereal){
     pLikes.textContent = `${cereal.likes} Likes`
     pLikes.classList.add("like")
     card.dataset.id = cereal.id
+
+
      
 
     //APPEND ELEMENTS
 
-    card.append(img, h2, pSmallDescription)
+    div1.append(img)
+    div2.append(h2, pSmallDescription )
+
+    card.append(div1, div2)
     main.append(card)
 
     card.addEventListener("click", function(evt){

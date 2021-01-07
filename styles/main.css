@@ -115,7 +115,8 @@ body {
     padding: 1rem;
     width: stretch;
     height: auto;
-    display: inline-grid;
+    display: flex;
+
     margin: 1rem 0.5rem;
     background-color: #ffffff;
     font-family: 'Oswald', sans-serif;
