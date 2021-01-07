@@ -34,14 +34,16 @@ function displayCereals(cereal){
     let pLikes = document.createElement("p")
     let card = document.createElement("div")
     let img = document.createElement("img")
-    let popUpImg = document.createElement("img")
     let h2 = document.createElement("h2")
     let pMilk = document.createElement("p")
     let pTopping = document.createElement("p")
     let pDescription = document.createElement("p")
     let pSmallDescription = document.createElement("p")
     let button = document.createElement("button")
-    let ul = document.createElement("ul")
+
+
+
+    let popUpImg = document.createElement("img")
 
     //EDIT ELEMENTS
     
@@ -80,9 +82,11 @@ function displayCereals(cereal){
         //Header
         let popUpHeader = document.createElement("div");
         popUpHeader.classList.add("popUpHeader");
+
         let title = document.createElement("div");
         title.classList.add("title");
         title.textContent = h2.textContent;
+        
         let closeBtn = document.createElement("button");
         closeBtn.classList.add("closeBtn");
         closeBtn.textContent = "X" 
@@ -91,6 +95,8 @@ function displayCereals(cereal){
         let popUpBody = document.createElement("div");
         popUpBody.classList.add("popUpBody");
         popUpBody.dataset.id = cereal.id
+
+        let ul = document.createElement("ul")
 
         //DISPLAY COMMENTS 
         cereal.comments.forEach(comment =>{
@@ -137,6 +143,7 @@ function displayCereals(cereal){
                   let li = document.createElement("li")
                   li.textContent = comment.text
                   ul.append(li)
+                  getCereals()
                 })
 
           })
@@ -150,6 +157,7 @@ function displayCereals(cereal){
         closeBtn.addEventListener("click", function(evt){
             overlay.style.opacity = "0";
             overlay.style.pointerEvents = "none";
+            ul.remove()
             popUp.remove();
         })
 
