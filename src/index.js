@@ -1,14 +1,20 @@
 
 let splash = document.querySelector(".splash")
+let form = document.querySelector("form")
+const body = document.querySelector("body");
+const overlay = document.querySelector("#overlay");
+const main = document.querySelector("main")
+
+// SPLASH SCREEN
 
 document.addEventListener('DOMContentLoaded', (evt) =>{
     burst()
     setTimeout(()=>{
         splash.classList.add("display-none")
-    }, 4000)
+    }, 40000)
 })
 
-// FETCH
+// FETCH FUNCTIONS
 
 function getCereals(){
     return fetch('http://127.0.0.1:3000/api/v1/cereals/')
@@ -19,12 +25,6 @@ function getCereals(){
         console.log(data)
     }))
 }
-
-// CONST ELEMENTS
-
-const body = document.querySelector("body");
-const overlay = document.querySelector("#overlay");
-const main = document.querySelector("main")
 
 
 function displayCereals(cereal){
@@ -162,8 +162,7 @@ function displayCereals(cereal){
 }
 
 
-
-
+// SLIDER MENU
 
 
 function sliderMenu(cereal){
@@ -174,7 +173,6 @@ function sliderMenu(cereal){
     menu.append(img)
 }
 
-form = document.querySelector("form")
 
 
 
@@ -221,8 +219,6 @@ function burst() {
     }
   
     function particle() {
-      //speed, life, location, life, colors
-      //speed range = -2.5 to 2.5
       this.speed = {
         x: -2.5 + Math.random() * 5,
         y: -2.5 + Math.random() * 5
@@ -278,8 +274,10 @@ function burst() {
 
   };
   
-  // Big Word Array
+  //Word Array
   words = [ "cereal"];
+
+
 
 getCereals()
 

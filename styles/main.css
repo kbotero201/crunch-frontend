@@ -6,7 +6,6 @@
 }
 
 
-
 body {
     margin: 0;
     padding: 0;
@@ -25,7 +24,7 @@ body {
   
   header {
     grid-area: header;
-    border: 2px solid red;
+    /*border: 2px solid red; */
     background: #5c00ee;
     font-family: 'Hanalei Fill', cursive;
     color: white;
@@ -77,14 +76,14 @@ body {
 
   #slider-menu {
     display: flex;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     overflow-x: auto;
     margin: 1rem 0;
     max-width: calc(100vw - 2rem);
   }
   
   #slider-menu img {
-    border: 2px solid red;
+    /* border: 2px solid red; */
     flex: 0 1 auto;
     height: 120px;
     margin-right: 0.5rem;
@@ -97,14 +96,15 @@ body {
   
   main {
     grid-area: main;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     background-color: #BFEFFF
     
   }
   
   nav {
     grid-area: nav;
-    border: 2px solid red;
+    padding: 2rem;
+    /* border: 2px solid red; */
   }
 
   .card {
