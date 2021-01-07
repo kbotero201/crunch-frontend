@@ -41,7 +41,6 @@ function displayCereals(cereal){
     let pDescription = document.createElement("p")
     let pSmallDescription = document.createElement("p")
     let button = document.createElement("button")
-    let ul = document.createElement("ul")
 
     //EDIT ELEMENTS
     
@@ -91,33 +90,52 @@ function displayCereals(cereal){
         let popUpBody = document.createElement("div");
         popUpBody.classList.add("popUpBody");
         popUpBody.dataset.id = cereal.id
+        let ul = document.createElement("ul")
 
         //DISPLAY COMMENTS 
         cereal.comments.forEach(comment =>{
             let li = document.createElement("li")
             li.textContent = comment.text
-            ul.append(li)
-        } )
+            let deleteBtn = document.createElement("button")
+            deleteBtn.classList.add("deleteBtn")
+            deleteBtn.textContent = "X"
+            deleteBtn.dataset.id = comment.id
+            // Comment Delete
+            deleteBtn.addEventListener("click", function(evt){
+              id = deleteBtn.dataset.id
+              fetch(`http://localhost:3000/api/v1/comments/${id}`, {
+                method: 'DELETE',
+              })
+               .then(r => r.json())
+               .then(() => {
+                 li.remove()
+                 deleteBtn.remove()
+               })
+          })
 
+            ul.append(li, deleteBtn)
+        } )
         //COMMENT FORM 
         let submit = document.createElement("input")
+        let inputName = document.createElement("input")
         let input = document.createElement("input")
         let form = document.createElement("form")
         let br = document.createElement("br")
         input.type = "text"
         input.placeholder = "Type Comment here.."
         input.name = "text"
+        inputName.type = "text"
+        inputName.placeholder = "Type your name here.."
+        inputName.name = "nameText"
         submit.type = "submit"
         form.dataset.id = cereal.id
-        form.append(input,br, submit)
+        form.append(inputName, input, br, submit)
 
           form.addEventListener("submit", (event) => {
             event.preventDefault();
 
-
-            // TODO Add the "name" 
             const newComment = {
-              name: "TestName",
+              name: event.target.nameText.value,
               text: event.target.text.value,
               cereal_id: parseInt(event.target.dataset.id)
             }
@@ -147,6 +165,7 @@ function displayCereals(cereal){
         popUp.append(popUpHeader, popUpBody);
         body.append(popUp);
 
+        // Close PopUP
         closeBtn.addEventListener("click", function(evt){
             overlay.style.opacity = "0";
             overlay.style.pointerEvents = "none";

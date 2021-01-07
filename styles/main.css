@@ -169,6 +169,12 @@ body {
   .popUpBody{
     padding: 10px 15px
   }
+  .deleteBtn{
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+  }
 
   #overlay{
     position: fixed;
