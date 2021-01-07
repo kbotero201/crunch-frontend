@@ -4,6 +4,8 @@ let form = document.querySelector("form")
 const body = document.querySelector("body");
 const overlay = document.querySelector("#overlay");
 const main = document.querySelector("main")
+const filter1Btn = document.querySelector(".filter1Btn")
+let cereals = []
 
 // SPLASH SCREEN
 
@@ -20,7 +22,10 @@ function getCereals(){
     return fetch('http://127.0.0.1:3000/api/v1/cereals/')
     .then(resp => resp.json()
     .then(data => {
-        data.forEach(data => displayCereals(data))
+        data.forEach(cereal => {
+          cereals.push(cereal)
+          displayCereals(cereal)
+        })
         data.forEach(data => sliderMenu(data))
         console.log(data)
     }))
@@ -267,9 +272,31 @@ function sliderMenu(cereal){
 
     })
 
+    
+}
+
+// CLEAR CARDS FROM MAIN
+
+function clearMain(){
+  while(main.childElementCount > 0){
+    main.firstChild.remove()
+  }
 }
 
 
+// FILTER 1
+filter1Btn.addEventListener("click", function(event){
+  clearMain()
+  return fetch('http://127.0.0.1:3000/api/v1/cereals/')
+    .then(resp => resp.json()
+    .then(data => {
+      data.forEach(cereal => {
+        if(cereal.likes == 0){
+          displayCereals(cereal)
+        }
+      })
+      }))
+})
 
 
 // BURST WELCOME SCREEN 
