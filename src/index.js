@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', (evt) =>{
     burst()
     setTimeout(()=>{
         splash.classList.add("display-none")
-    }, 40000)
+    }, 4000)
 })
 
 // FETCH FUNCTIONS
