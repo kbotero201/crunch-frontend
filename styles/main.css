@@ -288,3 +288,42 @@ body {
 body {
   font-family: "Lato", sans-serif;
 }
+
+.filterHolder{
+  padding: 10px 15px;
+  display: flex;
+}
+
+.filterBtnMilk{
+  cursor: pointer;
+  background: none;
+}
+
+.filterBtnTopping{
+  cursor: pointer;
+  background: none;
+}
+
+.clearFilter{
+  cursor: pointer;
+  background: none;
+  color: #5c00ee;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-family: 'Hanalei Fill', cursive;
+}
+
+.filterHeader{
+  font-family: 'Hanalei Fill', cursive;
+}
+
+.milkLi{
+  font-family: 'Hanalei Fill', cursive;
+}
+
+.toppingLi{
+  font-family: 'Hanalei Fill', cursive;
+}

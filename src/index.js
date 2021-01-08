@@ -4,7 +4,8 @@ let form = document.querySelector("form")
 const body = document.querySelector("body");
 const overlay = document.querySelector("#overlay");
 const main = document.querySelector("main")
-const searchBtn = document.querySelector(".searchBtn")
+const filters = document.querySelector(".filters")
+const clearFilter = document.querySelector(".clearFilter")
 
 // SPLASH SCREEN
 
@@ -30,15 +31,6 @@ function getCereals(){
     }).forEach(cereal => displayCereals(cereal))
     data.forEach(data => sliderMenu(data))
   }))
-
-
-    // return fetch('http://127.0.0.1:3000/api/v1/cereals/')
-    // .then(resp => resp.json()
-    // .then(data => {
-    //     data.forEach(cereal => displayCereals(cereal))
-    //     data.forEach(data => sliderMenu(data))
-    //     console.log(data)
-    // }))
 }
 
 
@@ -317,6 +309,68 @@ function clearMain(){
     main.firstChild.remove()
   }
 }
+
+// FILTER CLEAR
+
+clearFilter.addEventListener("click", function(event){
+  clearMain()
+  return fetch('http://127.0.0.1:3000/api/v1/cereals/')
+  .then(resp => resp.json()
+  .then(data => {
+    cereals = []
+    data.forEach(cereal=>cereals.push(cereal))
+    cereals.sort(function(a, b) {
+      if(a.likes < b.likes) return 1;
+      else if (a.likes > b.likes) return -1;
+      else return 0;
+    }).forEach(cereal => displayCereals(cereal))
+  }))
+})
+
+//FILTERS
+
+filters.addEventListener("click", function(event){
+  //Milks
+  if(event.target.matches(".filterBtnMilk")){
+    clearMain()
+    return fetch('http://127.0.0.1:3000/api/v1/cereals/')
+    .then(resp => resp.json()
+    .then(data => {
+      let cereals = []
+      data.forEach(cereal=>{
+        if(cereal.milk.includes(event.target.parentElement.children[0].textContent)){
+          cereals.push(cereal)
+        }
+      })
+      cereals.sort(function(a, b) {
+        if(a.likes < b.likes) return 1;
+        else if (a.likes > b.likes) return -1;
+        else return 0;
+      }).forEach(element => displayCereals(element))
+    }))
+  } 
+
+  //Toppings
+  if(event.target.matches(".filterBtnTopping")){
+    clearMain()
+    return fetch('http://127.0.0.1:3000/api/v1/cereals/')
+    .then(resp => resp.json()
+    .then(data => {
+      let cereals = []
+      data.forEach(cereal=>{
+        if(cereal.topping.includes(event.target.parentElement.children[0].textContent)){
+          cereals.push(cereal)
+        }
+      })
+      cereals.sort(function(a, b) {
+        if(a.likes < b.likes) return 1;
+        else if (a.likes > b.likes) return -1;
+        else return 0;
+      }).forEach(element => displayCereals(element))
+    }))
+  } 
+})
+
 
 
 // FILTER DESCENDING ORDER
