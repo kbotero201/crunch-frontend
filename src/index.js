@@ -18,13 +18,27 @@ document.addEventListener('DOMContentLoaded', (evt) =>{
 // FETCH FUNCTIONS
 
 function getCereals(){
-    return fetch('http://127.0.0.1:3000/api/v1/cereals/')
-    .then(resp => resp.json()
-    .then(data => {
-        data.forEach(cereal => displayCereals(cereal))
-        data.forEach(data => sliderMenu(data))
-        console.log(data)
-    }))
+  return fetch('http://127.0.0.1:3000/api/v1/cereals/')
+  .then(resp => resp.json()
+  .then(data => {
+    cereals = []
+    data.forEach(cereal=>cereals.push(cereal))
+    cereals.sort(function(a, b) {
+      if(a.likes < b.likes) return 1;
+      else if (a.likes > b.likes) return -1;
+      else return 0;
+    }).forEach(cereal => displayCereals(cereal))
+    data.forEach(data => sliderMenu(data))
+  }))
+
+
+    // return fetch('http://127.0.0.1:3000/api/v1/cereals/')
+    // .then(resp => resp.json()
+    // .then(data => {
+    //     data.forEach(cereal => displayCereals(cereal))
+    //     data.forEach(data => sliderMenu(data))
+    //     console.log(data)
+    // }))
 }
 
 
@@ -68,6 +82,7 @@ function displayCereals(cereal){
     pSmallDescription.textContent = cereal.description // <- cut the string turn it into small description
     pTopping.textContent = cereal.topping
     card.dataset.id = cereal.id
+    card.dataset.likes = cereal.likes
 
     div1.classList.add("div1")
     div2.classList.add("div2")
@@ -204,6 +219,7 @@ function displayCereals(cereal){
     })
 
 
+  //UPVOTE 
   card.addEventListener("click", function(evt){
     if(evt.target.matches(".button")){
       console.log("clcked!")
@@ -228,8 +244,11 @@ function displayCereals(cereal){
       .then(data => {
       p.textContent = `${data.likes}`
       console.log(data)
+      //increment cards dataset likes
+      card.dataset.likes = parseInt(card.dataset.likes) + 1
+      //send index of the card that the like button belongs to filterLikes function
+      filterLikes(evt.target.parentElement.parentElement.parentElement.dataset.id)
       })
-
     }
   })
 
@@ -300,19 +319,29 @@ function clearMain(){
 }
 
 
-// FILTER 1
-filter1Btn.addEventListener("click", function(event){
-  clearMain()
-  return fetch('http://127.0.0.1:3000/api/v1/cereals/')
-    .then(resp => resp.json()
-    .then(data => {
-      cereals = []
-      data.forEach(cereal => {
-          cereals.push(cereal)
-      })
-      cereals.sort.forEach(cereal=> displayCereals(cereal))
-    }))
-})
+// FILTER DESCENDING ORDER
+function filterLikes(id){
+  //find the position of card using dataid 
+  let index = -1;
+  for(let i = 0;i < main.childElementCount;i++){
+    if(main.children[i].dataset.id == id){
+      index = i;
+      break;
+    }
+  }
+  /*check if current card has more likes than the one on top of this one. 
+      IF current index = 0 => return 
+      ELSE IF current > top => remove current and switch with top
+      Else return
+  */
+ let currentCard = main.children[index];
+ let topCard = main.children[index-1];
+  if(index == 0)return;
+  else if(currentCard.dataset.likes > topCard.dataset.likes){
+    main.children[index].remove();
+    main.insertBefore(currentCard,topCard);
+  }
+}
 
 
 // BURST WELCOME SCREEN 
