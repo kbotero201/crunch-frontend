@@ -7,13 +7,13 @@ const main = document.querySelector("main")
 const filters = document.querySelector(".filters")
 const clearFilter = document.querySelector(".clearFilter")
 
-// SPLASH SCREEN
+// LOAD SPLASH SCREEN
 
 document.addEventListener('DOMContentLoaded', (evt) =>{
     burst()
     setTimeout(()=>{
         splash.classList.add("display-none")
-    }, 1000)
+    }, 4000)
 })
 
 // FETCH FUNCTIONS
@@ -57,9 +57,6 @@ function displayCereals(cereal){
 
     let iconMilk  = document.createElement("img")
     let iconTopping  = document.createElement("img")
-
-  
-
 
 
     //EDIT ELEMENTS
@@ -156,6 +153,7 @@ function displayCereals(cereal){
                 ul.append(li)
             })
           }))
+          
         //COMMENT FORM 
         let submit = document.createElement("input")
         let inputName = document.createElement("input")
@@ -302,10 +300,6 @@ function sliderMenu(cereal){
     img.dataset.id = id 
     menu.append(img)
 
-
-
-      //window.open('https://attacomsian.com', '_blank');
-
     img.addEventListener("click", function(evt){
       console.log("clicked!")
 
@@ -316,7 +310,6 @@ function sliderMenu(cereal){
       })
 
     })
-
     
 }
 
@@ -401,11 +394,7 @@ function filterLikes(id){
       break;
     }
   }
-  /*check if current card has more likes than the one on top of this one. 
-      IF current index = 0 => return 
-      ELSE IF current > top => remove current and switch with top
-      Else return
-  */
+
  let currentCard = main.children[index];
  let topIndex = index-1;
  let topCard = main.children[topIndex];
@@ -426,7 +415,7 @@ function filterLikes(id){
 }
 
 
-// BURST WELCOME SCREEN 
+// SPLASH LOAD SCREEN FUNCTION
 
 function burst() {
     var canvas = document.querySelector(".splash");
