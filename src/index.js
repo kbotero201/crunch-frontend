@@ -4,7 +4,7 @@ let form = document.querySelector("form")
 const body = document.querySelector("body");
 const overlay = document.querySelector("#overlay");
 const main = document.querySelector("main")
-const filter1Btn = document.querySelector(".filter1Btn")
+const searchBtn = document.querySelector(".searchBtn")
 
 // SPLASH SCREEN
 
@@ -310,7 +310,7 @@ function sliderMenu(cereal){
     
 }
 
-// CLEAR CARDS FROM MAIN
+// CLEAR CARDS FROM MAIN  used for filters
 
 function clearMain(){
   while(main.childElementCount > 0){
