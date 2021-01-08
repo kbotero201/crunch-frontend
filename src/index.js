@@ -407,11 +407,21 @@ function filterLikes(id){
       Else return
   */
  let currentCard = main.children[index];
- let topCard = main.children[index-1];
+ let topIndex = index-1;
+ let topCard = main.children[topIndex];
   if(index == 0)return;
-  else if(currentCard.dataset.likes > topCard.dataset.likes){
-    main.children[index].remove();
-    main.insertBefore(currentCard,topCard);
+  while(topIndex >= 0){
+    if(currentCard.dataset.likes > topCard.dataset.likes){
+      main.children[index].remove();
+      main.insertBefore(currentCard,topCard);
+      topIndex-=1;
+      index-=1;
+      currentCard = main.children[index];
+      topCard = main.children[topIndex];
+    }
+    else{
+      break;
+    }
   }
 }
 
