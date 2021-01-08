@@ -167,21 +167,33 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 1px solid black;
+    border: 1px solid white;
     border-radius: 20px;
     z-index: 20;
     background-color: white;
-    width: 500px;
-    max-width: 75%;
+    width: 55%;
   }
 
 
   .popUpHeader{
     padding: 10px 15px;
+    padding-bottom: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid black;
+    /*border-bottom: 1px solid black;*/
+  }
+
+  .parent{
+    display: flex;
+    padding-bottom: 35px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: 'Oswald', sans-serif;
+  }
+
+  .popUpImgDiv{
+    padding-bottom: 25px;
   }
 
   .title{
@@ -201,6 +213,13 @@ body {
   .popUpBody{
     padding: 10px 15px
   }
+
+  .title{
+    font-family: 'Hanalei Fill', cursive;
+    font-size: 32px;
+  }
+
+
   .deleteBtn{
     cursor: pointer;
     border: none;
@@ -214,6 +233,7 @@ body {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid black;
+    color: black;
   }
 
   .commentForm{
