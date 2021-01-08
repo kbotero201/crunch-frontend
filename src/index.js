@@ -46,6 +46,7 @@ function displayCereals(cereal){
     let pTopping = document.createElement("p")
     let pDescription = document.createElement("p")
     let pSmallDescription = document.createElement("p")
+    let commentText = document.createElement("h3")
 
     let div1 = document.createElement("div")
     let div2 = document.createElement("div")
@@ -56,6 +57,7 @@ function displayCereals(cereal){
 
     let iconMilk  = document.createElement("img")
     let iconTopping  = document.createElement("img")
+
   
 
 
@@ -92,6 +94,8 @@ function displayCereals(cereal){
 
     pMilk.append(iconMilk)
     pTopping.append(iconTopping)
+
+    commentText.textContent = "What others are saying:"
     
 
     //APPEND ELEMENTS
@@ -126,9 +130,19 @@ function displayCereals(cereal){
         closeBtn.textContent = "X" 
 
         //Body
-        let popUpBody = document.createElement("div");
-        popUpBody.classList.add("popUpBody");
-        popUpBody.dataset.id = cereal.id
+        let parent = document.createElement("div")
+        parent.classList.add("parent")
+
+        let popUpBody1 = document.createElement("div")
+        popUpBody1.classList.add("div1")
+        popUpBody1.dataset.id = cereal.id
+
+        let popUpBody2 = document.createElement("div")
+        popUpBody2.classList.add("div2")
+
+        let popUpImgDiv = document.createElement("div")
+        popUpImgDiv.classList.add("popUpImgDiv")
+
         let ul = document.createElement("ul")
 
 
@@ -149,10 +163,10 @@ function displayCereals(cereal){
         let form = document.createElement("form")
         let br = document.createElement("br")
         input.type = "text"
-        input.placeholder = "Type Comment here.."
+        input.placeholder = "Comment.."
         input.name = "text"
         inputName.type = "text"
-        inputName.placeholder = "Type your name here.."
+        inputName.placeholder = "Name.."
         inputName.name = "nameText"
         submit.type = "submit"
         form.dataset.id = cereal.id
@@ -190,10 +204,14 @@ function displayCereals(cereal){
 
         //Append
 
+        popUpImgDiv.append(popUpImg)
+
+        parent.append(popUpBody1, popUpBody2)
 
         popUpHeader.append(title, closeBtn);
-        popUpBody.append(popUpImg, pDescription, pMilk, pTopping, ul, form);
-        popUp.append(popUpHeader, popUpBody);
+        popUpBody1.append(popUpImgDiv, pDescription, pMilk, pTopping);
+        popUpBody2.append(commentText, ul, form);
+        popUp.append(popUpHeader, parent);
         body.append(popUp);
 
   
